@@ -14,12 +14,12 @@ const server = http.createServer((req, res) => {
   const path = req.url;
 
   if (path === DEFAULT_PATH) {
-    res.setHeader("Content-Type", "text/html");
+    res.writeHead(200, { "Content-Type": "text/html" });
     res.end(html);
   } else if (path === INTRODUCTION_PATH) {
+    res.writeHead(200, { "Content-Type": "text/html" });
     const data = fs.readFileSync("data.json", "utf-8");
-    const json = JSON.parse(data);
-    res.end(`Name: ${json.name}, age: ${json.age}`);
+    res.end(data);
   } else {
     res.statusCode = 404;
     res.end(`Page not found.`);
